@@ -1,0 +1,21 @@
+name: Auto Update
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Clone repo A
+      uses: actions/checkout@v2
+      with:
+        repository: RP-Tama/1TTS-Teknologi-Multimedia-
+        ref: main
+    - name: Push to repo B
+      run: |
+        git config --global user.name "Koro129"
+        git config --global user.email "ilhamyumna23@gmail.com"
+        git push
