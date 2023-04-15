@@ -1,21 +1,20 @@
-name: Auto Update
-
+name: Update Repo B
 on:
-  push:
-    branches:
-      - main
-
+  schedule:
+    - cron: '* * * * *' # Update setiap 10 menit
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-    - name: Clone repo A
+    - name: Check out Repo B
       uses: actions/checkout@v2
-      with:
-        repository: RP-Tama/1TTS-Teknologi-Multimedia-
-        ref: main
-    - name: Push to repo B
+    - name: Update Repo B
       run: |
         git config --global user.name "Koro129"
         git config --global user.email "ilhamyumna23@gmail.com"
+        git remote add upstream https://github.com/RP-Tama/1TTS-Teknologi-Multimedia-.git
+        git fetch upstream
+        git merge upstream/master --no-edit
         git push
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
